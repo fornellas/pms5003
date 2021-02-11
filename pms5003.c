@@ -218,10 +218,10 @@ enum pms5003_error pms5003_set_data_mode(
 	int ret;
 	struct pms5003_response_data response_data;
 
-	if(ret = send_command(COMMAND_CHANGE_MODE, data_mode, write_serial))
+	if((ret = send_command(COMMAND_CHANGE_MODE, data_mode, write_serial)))
 		return ret;
 
-	if(ret = read_response_data(&response_data, read_serial))
+	if((ret = read_response_data(&response_data, read_serial)))
 		return ret;
 
 	if(response_data.command != COMMAND_CHANGE_MODE)
@@ -241,7 +241,7 @@ enum pms5003_error pms5003_get_passive_measurement(
 	int ret;
 	struct pms5003_measurement_data measurement_data;
 
-	if(ret = send_command(COMMAND_READ_IN_PASSIVE_MODE, 0, write_serial))
+	if((ret = send_command(COMMAND_READ_IN_PASSIVE_MODE, 0, write_serial)))
 		return ret;
 
 	return pms5003_get_active_measurement(measurement, read_serial);
@@ -254,7 +254,7 @@ enum pms5003_error pms5003_get_active_measurement(
 	int ret;
 	struct pms5003_measurement_data measurement_data;
 
-	if(ret = read_measurement_data(&measurement_data, read_serial))
+	if((ret = read_measurement_data(&measurement_data, read_serial)))
 		return ret;
 
 	extract_measurement(&measurement_data, measurement);
@@ -296,11 +296,11 @@ enum pms5003_error pms5003_sleep_set(
 	int ret;
 	struct pms5003_response_data response_data;
 
-	if(ret = send_command(COMMAND_SLEEP_SET, sleep_mode, write_serial))
+	if((ret = send_command(COMMAND_SLEEP_SET, sleep_mode, write_serial)))
 		return ret;
 
 	if(sleep_mode == PMS5003_SLEEP) {
-		if(ret = read_response_data(&response_data, read_serial))
+		if((ret = read_response_data(&response_data, read_serial)))
 			return ret;
 
 		if(response_data.command != COMMAND_SLEEP_SET)
