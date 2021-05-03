@@ -259,30 +259,6 @@ enum pms5003_error pms5003_get_active_measurement(
 
 	extract_measurement(&measurement_data, measurement);
 
-	if(
-		!(measurement->pm1_0_cf1) &&
-		!(measurement->pm2_5_cf1) &&
-		!(measurement->pm10_cf1)
-	)
-		return PMS5003_ERROR_EMPTY_DATA;
-
-	if(
-		!(measurement->pm1_0_atm_env) &&
-		!(measurement->pm2_5_atm_env) &&
-		!(measurement->pm10_atm_env)
-	)
-		return PMS5003_ERROR_EMPTY_DATA;
-
-	if(
-		!(measurement->gt_0_3um) &&
-		!(measurement->gt_0_5um) &&
-		!(measurement->gt_1_0um) &&
-		!(measurement->gt_2_5um) &&
-		!(measurement->gt_5_0um) &&
-		!(measurement->gt_10um)
-	)
-		return PMS5003_ERROR_EMPTY_DATA;
-
 	// TODO add sleep: new measurements only work after ~35ms
 
 	return PMS5003_ERROR_NONE;
